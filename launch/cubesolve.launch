@@ -1,0 +1,5 @@
+<launch>
+    <node name="cubesolve_node" pkg="cubesolve" type="cubesolve" output="screen">
+        <rosparam command="load" file="$(find cubesolve)/config/cubesolve.yaml" /> <!--Load parameters from config files-->
+    </node>
+</launch>
