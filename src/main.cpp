@@ -5,26 +5,27 @@
 int main(int argc, char **argv)
 {
 
-  cubesolve cube("000011112222333344445555");
+  cubesolve cube;
+  cube.cubeInit("000011112222333344445555");
   cube.turnF();
-  cube.show();
-
+  cube.turnF();
+  
+  
   treeRoot root;
-  treeCreate(root,0,'N');
+  treeCreate(root,0,"N");
   //treeDisplay(root);
-  cubesolve finish_cude = cubeSearch(root,cube);
-  cout<<cube.showOperate()<< endl;
+  cubeSearch(root,cube);
   return 0; 
 }
 
-void treeCreate(treeRoot &root, int depth, char type){
+void treeCreate(treeRoot &root, int depth, string type){
   if(depth<=11) {
     root = new treeNode;
     root -> depth = depth;
     root -> type = type;
-    treeCreate(root -> F, depth+1,'F');
-    treeCreate(root -> U, depth+1,'U');
-    treeCreate(root -> R, depth+1,'R');
+    treeCreate(root -> F, depth+1,"F");
+    treeCreate(root -> U, depth+1,"U");
+    treeCreate(root -> R, depth+1,"R");
   }
   else root = nullptr;
 }
@@ -38,14 +39,15 @@ void treeDisplay(treeRoot root){
   }
 }
 
-cubesolve cubeSearch(treeRoot &root,cubesolve cube){
+void cubeSearch(treeRoot &root,cubesolve cube){
+  //cube.show();
   if(root){
     if(root -> type != "N"){
       cube.turn(root -> type);
       cube.addOperate(root -> type);
     }
       
-    if(cube.check())  return cube;
+    if(cube.check()) cout<<cube.showOperate()<< endl; 
     cubeSearch(root -> F, cube);
     cubeSearch(root -> U, cube);
     cubeSearch(root -> R, cube);

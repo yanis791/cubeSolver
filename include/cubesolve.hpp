@@ -25,9 +25,9 @@ class cubesolve
 private:
   /* data */
   string F,B,U,D,L,R;
-  string operate;
+  string operate = "start:";
 public:
-  cubesolve(string cube_origin);
+  void cubeInit(string cube_origin);
   void turnF();
   void turnU();
   void turnR();
@@ -41,9 +41,9 @@ public:
 
 };
 
-void treeCreate(treeRoot &root, int depth,char type);
+void treeCreate(treeRoot &root, int depth,string type);
 void treeDisplay(treeRoot root);
-cubesolve cubeSearch(treeRoot &root,cubesolve cube);
+void cubeSearch(treeRoot &root,cubesolve cube);
 
 void cubesolve::addOperate(string type){
   operate.append(type);
@@ -54,7 +54,7 @@ string cubesolve::showOperate(){
   return operate;
 }
 
-cubesolve::cubesolve(string cube_origin)
+void cubesolve::cubeInit(string cube_origin)
 {
   F.assign(cube_origin,0,4);cube_origin.erase(0,4);
   R.assign(cube_origin,0,4);cube_origin.erase(0,4);
@@ -89,7 +89,13 @@ void cubesolve::turnU(){
 }
 
 void cubesolve::show(){
-  cout<<F+R+B+L+U+D<<endl;
+  cout<<F<<endl;
+  cout<<R<<endl;
+  cout<<B<<endl;
+  cout<<L<<endl;
+  cout<<U<<endl;
+  cout<<D<<endl;
+  cout<<" "<<endl;
 }
 
 void cubesolve::cubeSwitch(char &a,char &b,char &c,char &d){
@@ -102,7 +108,8 @@ void cubesolve::cubeSwitch(char &a,char &b,char &c,char &d){
 }
 
 bool cubesolve::checkEach(string str){
-  if(str[0] == str[1] == str[2] == str[3])
+  if(str[0] == str[1] && str[0]== str[2] &&
+  str[0] == str[3])
     return true;
   else return false;
 }
@@ -112,4 +119,5 @@ bool cubesolve::check(){
     return true;
   else return false;
 }
+
 #endif //CUBESOLVE_HPP
